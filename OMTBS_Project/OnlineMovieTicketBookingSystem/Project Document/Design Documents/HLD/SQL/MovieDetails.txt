@@ -1,0 +1,56 @@
+Movie Details Tables-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[MovieDetails]    Script Date: 10/25/2018 5:31:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[MovieDetails](
+	[BannerID] [int] IDENTITY(1,1) NOT NULL,
+	[MovieImage] [image] NOT NULL,
+	[MovieName] [varchar](20) NOT NULL,
+	[Description] [varchar](max) NOT NULL,
+	[DirectorName] [varchar](30) NOT NULL,
+	[Rating] [decimal](18, 0) NOT NULL,
+	[Price] [money] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+MovieDetails Stored Procedures-
+
+1.Insert Movie Details
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[sp_Insert_Details]    Script Date: 10/25/2018 5:56:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[sp_Insert_Details]
+	@MovieName nvarchar(50),
+	@NoOfTickets int,
+	@Amount int
+AS
+	insert into [OMTBS].[Details] (MovieName,NoOfTickets,Amount) 
+	values(@MovieName, @NoOfTickets, @Amount)
+RETURN 0
+
+GO
+
+

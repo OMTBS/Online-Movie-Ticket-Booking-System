@@ -1,0 +1,154 @@
+Users Table-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[Users]    Script Date: 10/25/2018 5:35:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[Users](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Username] [varchar](25) NOT NULL,
+	[Password] [varchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+Users Stored Procedure-
+
+1.Delete Users
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Delete_Procedure_Users]    Script Date: 10/25/2018 6:15:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[usp_Delete_Procedure_Users] 
+	-- Adding the parameters for the stored procedure here
+	@userName varchar(25) 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Delete statements for procedure here
+	DELETE FROM [OMTBS].Users WHERE Username=@userName
+END
+
+GO
+
+2.Insert Users
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Insert_Procedure_Users]    Script Date: 10/25/2018 6:16:18 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Titiksh Kumar
+-- Create date: 29-Sep-2018
+-- Description:	Insert Procedure for Users Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Insert_Procedure_Users] 
+	-- Adding the parameters for the stored procedure here
+	@Username varchar(25) = null,
+	@Password varchar(max)=null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [OMTBS].Users(Username,Password) values(@Username,@Password);
+END
+
+GO
+
+3.Select All Users
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Select_Procedure_Users]    Script Date: 10/25/2018 6:16:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Titiksh Kumar
+-- Create date: 08-Oct-2018
+-- Description:	To select the Username and Password from Users Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Select_Procedure_Users]
+	-- Added the parameters for the stored procedure here
+	@Username varchar(25),
+	@Password varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Select statements for procedure here
+	SELECT Username,Password FROM [OMTBS].[Users] WHERE Username=@Username AND  Password=@Password
+END
+
+
+GO
+
+4.Update Users
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Update_Procedure_Users]    Script Date: 10/25/2018 6:17:15 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[usp_Update_Procedure_Users] 
+	-- Add the parameters for the stored procedure here
+	@ID int,
+	@Username varchar(25),
+	@Password varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	UPDATE [OMTBS].Users SET UserName=@UserName,Password=@Password WHERE ID=@ID
+END
+
+GO
+
+
+

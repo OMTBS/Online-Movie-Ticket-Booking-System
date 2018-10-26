@@ -1,0 +1,170 @@
+Genre Table
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[Genre]    Script Date: 10/25/2018 5:27:56 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[Genre](
+	[GenreID] [int] IDENTITY(1,1) NOT NULL,
+	[GenreName] [varchar](25) NOT NULL,
+	[Description] [varchar](max) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GenreID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+Genre Stored Procedures-
+
+1.Delete Genre-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Delete_Procedure_Genre]    Script Date: 10/25/2018 5:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Titiksh Kumar
+-- Create date: 29-Sep-2018
+-- Description:	Delete Procedure for Genre Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Delete_Procedure_Genre] 
+	-- Adding the parameters for the stored procedure here
+	@GenreID int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Delete statements for procedure here
+	DELETE FROM [OMTBS].Genre WHERE GenreID=@GenreID
+END
+
+GO
+
+
+2.Insert Genre-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Insert_Procedure_Genre]    Script Date: 10/25/2018 5:40:00 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Titiksh Kumar
+-- Create date: 29-Sep-2018
+-- Description:	Insert Procedure for Genre Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Insert_Procedure_Genre] 
+	-- Add the parameters for the stored procedure here
+	@GenreID int = 0, 
+	@GenreName varchar(25) = null,
+	@Description varchar(max)=null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [OMTBS].Genre(GenreID,GenreName,Description) values(@GenreID,@GenreName,@Description);
+END
+
+GO
+
+3.Select Genre
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Select_Procedure_Genres]    Script Date: 10/25/2018 5:40:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Shravi Vidyarthi
+-- Create date: 08-Oct-2018
+-- Description:	To select the Username and Password from Users Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Select_Procedure_Genres]
+	-- Added the parameters for the stored procedure here
+	@GenreId int,
+	@GenreName varchar(25),
+	@Description varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Select statements for procedure here
+	SELECT GenreID,GenreName,Description FROM [OMTBS].[Genre] WHERE GenreID=@GenreId 
+END
+
+
+
+GO
+
+4.Update Genre-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Update_Procedure_Genre]    Script Date: 10/25/2018 5:42:00 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[usp_Update_Procedure_Genre] 
+	-- Add the parameters for the stored procedure here
+	@GenreID int, 
+	@GenreName varchar(25),
+	@Description varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	UPDATE [OMTBS].Genre SET GenreName=@GenreName,Description=@Description WHERE GenreID=@GenreID
+END
+
+GO
+
+
+
+
+

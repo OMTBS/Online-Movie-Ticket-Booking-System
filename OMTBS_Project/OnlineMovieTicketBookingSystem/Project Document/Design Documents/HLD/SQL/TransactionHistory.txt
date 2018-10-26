@@ -1,0 +1,58 @@
+TransactionHistory Table-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[TransactionHistory]    Script Date: 10/25/2018 5:34:30 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[TransactionHistory](
+	[MovieID] [int] NOT NULL,
+	[MovieName] [varchar](max) NOT NULL,
+	[No_of_Tickets] [int] NOT NULL,
+	[Show_Date] [date] NOT NULL,
+	[Show_Time] [time](7) NOT NULL,
+	[Price] [money] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[MovieID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [OMTBS].[TransactionHistory]  WITH CHECK ADD FOREIGN KEY([MovieID])
+REFERENCES [OMTBS].[Movies] ([MovieID])
+GO
+
+ALTER TABLE [OMTBS].[TransactionHistory]  WITH CHECK ADD FOREIGN KEY([MovieID])
+REFERENCES [OMTBS].[Movies] ([MovieID])
+GO
+
+Transaction Details Stored Procedure-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[TransactionHistory_ByMovieId]    Script Date: 10/25/2018 6:14:10 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[TransactionHistory_ByMovieId]
+AS
+    select * from [OMTBS].[TransactionHistory]
+RETURN 0
+GO

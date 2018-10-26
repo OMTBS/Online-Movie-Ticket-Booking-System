@@ -1,0 +1,189 @@
+Shows Table-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[Shows]    Script Date: 10/25/2018 5:33:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[Shows](
+	[ShowID] [int] IDENTITY(1,1) NOT NULL,
+	[ScreenID] [varchar](5) NOT NULL,
+	[MovieID] [int] NOT NULL,
+	[Showtime] [datetime] NOT NULL,
+	[Price] [money] NOT NULL,
+ CONSTRAINT [PK__Shows__6DE3E0D2AD83428B] PRIMARY KEY CLUSTERED 
+(
+	[ShowID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [OMTBS].[Shows]  WITH CHECK ADD  CONSTRAINT [FK__Shows__MovieID__0BC85AEC] FOREIGN KEY([MovieID])
+REFERENCES [OMTBS].[Movies] ([MovieID])
+GO
+
+ALTER TABLE [OMTBS].[Shows] CHECK CONSTRAINT [FK__Shows__MovieID__0BC85AEC]
+GO
+
+ALTER TABLE [OMTBS].[Shows]  WITH CHECK ADD  CONSTRAINT [FK__Shows__ScreenID__0AD436B3] FOREIGN KEY([ScreenID])
+REFERENCES [OMTBS].[Screens] ([ScreenID])
+GO
+
+ALTER TABLE [OMTBS].[Shows] CHECK CONSTRAINT [FK__Shows__ScreenID__0AD436B3]
+GO
+
+
+Shows Stored Procedures-
+
+1.Delete Shows
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Delete_Procedure_Shows]    Script Date: 10/25/2018 6:08:01 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- ==================================================
+-- Author:		Sabyasachi Sahoo
+-- Create date: 29-Sep-2018
+-- Description:	Delete Procedure for ShowsID in Shows
+-- ==================================================
+CREATE PROCEDURE [OMTBS].[usp_Delete_Procedure_Shows] 
+	-- Adding the parameters for the stored procedure here
+	@ShowsID int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Delete statements for procedure here
+	DELETE FROM [OMTBS].Shows WHERE ShowID=@ShowsID
+END
+
+GO
+
+2.Insert Shows
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Insert_Procedure_Shows]    Script Date: 10/25/2018 6:08:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Sabyasachi Sahoo
+-- Create date: 09/29/2018
+-- Description:	Insert Procedure for ShowsID in Shows
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Insert_Procedure_Shows] 
+	-- Add the parameters for the stored procedure here
+	@ShowID int =0,
+	@ScreenID int =0,
+	@MovieID int =0,
+	@Showtime datetime = null,
+	@Price money =0
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [OMTBS].Shows(ShowID,ScreenID,MovieID,Showtime,Price) VALUES (@ShowID,@ScreenID,@MovieID,@Showtime,@Price);
+END
+
+GO
+
+3.Select All Shows
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_SelectAll_Procedure_Shows]    Script Date: 10/25/2018 6:09:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [OMTBS].[usp_SelectAll_Procedure_Shows]
+	-- Add the parameters for the stored procedure here
+	
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	Select * from [OMTBS].Shows 
+END
+
+
+
+GO
+
+4.Update Shows
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Update_Procedure_Shows]    Script Date: 10/25/2018 6:09:56 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- ======================================================
+-- Author:		Sabyasachi Sahoo
+-- Create date: 29-Sep-2018
+-- Description:	Update Procedure for ShowsID in Shows
+-- ======================================================
+
+CREATE PROCEDURE [OMTBS].[usp_Update_Procedure_Shows]
+	-- Add the parameters for the stored procedure here
+	@ShowID int =0, 
+	@ScreenID int =0,
+	@MovieID int =0,
+	@Showtime datetime = null,
+	@Price money =0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	UPDATE [OMTBS].Shows SET ScreenID=@ScreenID, MovieID=@MovieID,Showtime=@Showtime, Price=@Price WHERE ShowID=@ShowID
+END
+
+GO
+
+
+

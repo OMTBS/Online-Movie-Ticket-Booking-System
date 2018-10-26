@@ -1,0 +1,172 @@
+Viewers Table-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[Viewers]    Script Date: 10/25/2018 5:35:36 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[Viewers](
+	[ViewersID] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](15) NOT NULL,
+	[LastName] [varchar](20) NOT NULL,
+	[Mobileno] [varchar](10) NOT NULL,
+	[Email] [varchar](50) NULL,
+	[Username] [varchar](12) NOT NULL,
+	[Password] [varchar](16) NOT NULL,
+ CONSTRAINT [PK__Viewers__C004295E107FF76B] PRIMARY KEY CLUSTERED 
+(
+	[ViewersID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+Viewers Stored Procedure
+
+1.Update Viewers
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Update_Procedure_Viewers]    Script Date: 10/25/2018 6:18:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[usp_Update_Procedure_Viewers] 
+	-- Add the parameters for the stored procedure here
+	@Mobileno bigint,
+	@Username varchar(12),
+	@Password varchar(16)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	UPDATE [OMTBS].Viewers SET Mobileno=@Mobileno,Username=@Username,Password=@Password WHERE UserName=@Username
+END
+GO
+
+2.Select All Viewers
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Select_Procedure_Viewers]    Script Date: 10/25/2018 6:19:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Titiksh Kumar
+-- Create date: 08-Oct-2018
+-- Description:	To select the Username and Password from Viewers Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Select_Procedure_Viewers]
+	-- Added the parameters for the stored procedure here
+	@Username varchar(50),
+	@Password varchar(16)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Select statements for procedure here
+	SELECT [Username],[Password] FROM [OMTBS].[Viewers] WHERE Username=@Username AND  [Password]=@Password
+END
+
+GO
+
+3.Insert Viewers
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Insert_Procedure_Viewers]    Script Date: 10/25/2018 6:19:34 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+-- =============================================
+-- Author:		Yash Verma
+-- Create date: 09/29/2018
+-- Description:	Insert Procedure for Viewers 
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Insert_Procedure_Viewers] 
+	-- Add the parameters for the stored procedure here
+	@FirstName varchar(15),
+	@LastName varchar(20),
+	@Mobileno varchar(10),
+	@Email varchar(50),
+	@Username varchar(12),
+	@Password varchar(16)
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [OMTBS].[Viewers](FirstName,LastName,Mobileno,Email,Username,Password) VALUES (@FirstName,@LastName,@Mobileno,@Email,@Username,@Password);
+END
+
+
+GO
+
+
+4.Delete Viewers
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Delete_Procedure_Viewers]    Script Date: 10/25/2018 6:20:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [OMTBS].[usp_Delete_Procedure_Viewers] 
+	-- Adding the parameters for the stored procedure here
+	@ViewersID int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Delete statements for procedure here
+	DELETE FROM [OMTBS].Viewers WHERE ViewersID=@ViewersID
+END
+
+
+GO
+
+

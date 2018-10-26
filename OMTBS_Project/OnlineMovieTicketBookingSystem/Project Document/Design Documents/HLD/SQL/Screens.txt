@@ -1,0 +1,165 @@
+Screens Table-
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  Table [OMTBS].[Screens]    Script Date: 10/25/2018 5:32:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [OMTBS].[Screens](
+	[ScreenID] [varchar](5) NOT NULL,
+	[ScreenName] [varchar](15) NOT NULL,
+	[Capacity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ScreenID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+Screen Stored  Procedures-
+
+1.Delete Screens
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Delete_Procedure_Screens]    Script Date: 10/25/2018 6:04:10 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Sravani Kaleepu
+-- Create date: 29-sep-2018
+-- Description:	Update Procedure for Screens Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Delete_Procedure_Screens] 
+	-- Adding the parameters for the stored procedure here
+	@ScreenID varchar(5)
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Delete statements for procedure here
+	DELETE FROM [OMTBS].Screens  WHERE ScreenID=@ScreenID
+END
+
+GO
+
+2.Insert Screens
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Insert_Procedure_Screens]    Script Date: 10/25/2018 6:04:49 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Sravani Kaleepu
+-- Create date: 29-sep-2018
+-- Description:	Insert Procedure for Screens Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Insert_Procedure_Screens] 
+	-- Add the parameters for the stored procedure here
+	@ScreenID varchar(5) = 0, 
+	@ScreenName varchar(15) =  NULL,
+	@Capacity int =0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [OMTBS].Screens(ScreenID,ScreenName,Capacity) values(@ScreenID,@ScreenName,@Capacity);
+END
+
+GO
+
+3.Select All Screens
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_SelectAll_Procedure_Screens]    Script Date: 10/25/2018 6:05:34 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [OMTBS].[usp_SelectAll_Procedure_Screens]
+	-- Add the parameters for the stored procedure here
+	@ScreenID int = 0, 
+	@ScreenName varchar =null,
+	@Capacity int=0
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	Select * from [OMTBS].Screens where  ScreenID=@ScreenID
+END
+
+GO
+
+4.Update Screens
+
+USE [8Aug_MIPL]
+GO
+
+/****** Object:  StoredProcedure [OMTBS].[usp_Update_Procedure_Screens]    Script Date: 10/25/2018 6:07:00 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Sravani Kaleepu
+-- Create date: 29-sep-2018
+-- Description:	Update Procedure for Screens Table
+-- =============================================
+CREATE PROCEDURE [OMTBS].[usp_Update_Procedure_Screens] 
+	-- Adding the parameters for the stored procedure here
+	@ScreenID varchar(5), 
+	@ScreenName varchar(15),
+	@Capacity int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Update statements for procedure here
+	UPDATE  [OMTBS].Screens SET ScreenName=@ScreenName,Capacity=@Capacity WHERE ScreenID=@ScreenID
+END
+
+GO
+
+
+
